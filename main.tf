@@ -111,11 +111,11 @@ resource "local_file" "dynamic_inventory" {
   }
 }
 
-# resource "null_resource" "run_ansible" {
-#   depends_on = [local_file.dynamic_inventory]
+resource "null_resource" "run_ansible" {
+  depends_on = [local_file.dynamic_inventory]
 
-#   provisioner "local-exec" {
-#     command = "ansible-playbook -i dynamic_inventory.ini playbook.yml"
-#     working_dir = path.module
-#   }
-# }
+  provisioner "local-exec" {
+    command = "ansible-playbook -i dynamic_inventory.ini playbook.yml"
+    working_dir = path.module
+  }
+}
