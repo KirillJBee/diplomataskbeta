@@ -43,11 +43,18 @@ pipeline {
             }
         }
         
+        // stage('Apply plan') {
+        //     steps {
+        //         sh 'terraform apply --auto-approve'
+        //     }
+        // }
+
         stage('Apply plan') {
             steps {
-                sh 'terraform apply --auto-approve'
+                sh 'terraform destroy --auto-approve'
             }
         }
+
 
     }
 
