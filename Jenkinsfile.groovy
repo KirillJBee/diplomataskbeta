@@ -41,35 +41,36 @@ pipeline {
                 sh 'docker system prune -af'
             }
         }
-        // stage('Terraform init') {
-        //     steps {
-        //         sh 'terraform init'
 
-        //         //  cleanWs()
-        //         //     dir("${env.WORKSPACE}@tmp") {
-        //         //         deleteDir()
-        //         //     }
-        //     }  
-        // }
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
 
-        // stage('Plan') {
-        //     steps {
-        //         sh 'terraform plan -out tfplan'
-        //         sh 'terraform show -no-color tfplan > tfplan.txt'
-        //     }
-        // }
+                //  cleanWs()
+                //     dir("${env.WORKSPACE}@tmp") {
+                //         deleteDir()
+                //     }
+            }  
+        }
+
+        stage('Plan') {
+            steps {
+                sh 'terraform plan -out tfplan'
+                sh 'terraform show -no-color tfplan > tfplan.txt'
+            }
+        }
         
-        // // stage('Apply plan') {
-        // //     steps {
-        // //         sh 'terraform apply --auto-approve'
-        // //     }
-        // // }
-
         // stage('Apply plan') {
         //     steps {
-        //         sh 'terraform destroy --auto-approve'
+        //         sh 'terraform apply --auto-approve'
         //     }
         // }
+
+        stage('Destroy') {
+            steps {
+                sh 'terraform destroy --auto-approve'
+            }
+        }
 
 
     }
