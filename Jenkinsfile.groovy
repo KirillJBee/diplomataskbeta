@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent { 
+                label 'awsssh'
+            }
     
     parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
