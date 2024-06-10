@@ -29,13 +29,20 @@ pipeline {
             steps {
                 sh 'terraform init'
 
-                 cleanWs()
-                    dir("${env.WORKSPACE}@tmp") {
-                        deleteDir()
-                    }
-            }
-            
+                //  cleanWs()
+                //     dir("${env.WORKSPACE}@tmp") {
+                //         deleteDir()
+                //     }
+            }  
         }
+
+        stage('Plan') {
+            steps {
+                sh 'terraform plan -out tfplan'
+                sh 'terraform show -no-color tfplan > tfplan.txt'
+            }
+        }
+    
     }
 
 }
