@@ -42,7 +42,13 @@ pipeline {
                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
-    
+        
+        tage('Apply') {
+            steps {
+                sh 'terraform apply --auto-approve'
+            }
+        }
+
     }
 
 }
