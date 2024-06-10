@@ -30,7 +30,7 @@ pipeline {
 
         stage('build image webpage') { 
             steps {
-                sh 'docker build -t ${NAME_IMAGE_DEV} .'    
+                sh 'docker build -t ${NAME_IMAGE} .'    
             }
         }
 
