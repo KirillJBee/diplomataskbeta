@@ -28,11 +28,13 @@ pipeline {
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
-            }
-            cleanWs()
+
+                 cleanWs()
                     dir("${env.WORKSPACE}@tmp") {
                         deleteDir()
                     }
+            }
+            
         }
     }
 
