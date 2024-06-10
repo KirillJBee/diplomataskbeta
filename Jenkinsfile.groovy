@@ -53,24 +53,41 @@ pipeline {
             }  
         }
 
-        stage('Plan') {
+
+        stage('Apply / Destroy') {
             steps {
-                sh 'terraform plan -out tfplan'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                script {
+                    if (params.action == 'apply') {
+                        sh 'terraform ${action} -input=false tfplan'
+                    } 
+                    else if (params.action == 'destroy') {
+                        sh 'terraform ${action} --auto-approve'
+                    } 
+                    else {
+                        error "Invalid action selected. Please choose either 'apply' or 'destroy'."
+                    }
+                }
             }
         }
-        
-        // stage('Apply plan') {
+
+        // stage('Plan') {
         //     steps {
-        //         sh 'terraform apply --auto-approve'
+        //         sh 'terraform plan -out tfplan'
+        //         sh 'terraform show -no-color tfplan > tfplan.txt'
         //     }
         // }
+        
+        // // stage('Apply plan') {
+        // //     steps {
+        // //         sh 'terraform apply --auto-approve'
+        // //     }
+        // // }
 
-        stage('Destroy') {
-            steps {
-                sh 'terraform destroy --auto-approve'
-            }
-        }
+        // stage('Destroy') {
+        //     steps {
+        //         sh 'terraform destroy --auto-approve'
+        //     }
+        // }
 
 
     }
