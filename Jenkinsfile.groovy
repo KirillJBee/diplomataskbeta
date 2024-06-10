@@ -1,10 +1,11 @@
 pipeline {
+
     agent { 
                 label 'JenkinsNode1'
             }
     
     parameters {
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        // booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
         choice(name: 'action', choices: ['apply', 'destroy'], description: 'Select the action to perform')
     }
 
@@ -13,6 +14,8 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION    = 'eu-west-1'
         GIT_TOKEN = credentials('GIT_TOKEN')
+        DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
+        NAME_IMAGE = 'kirilljbee/diplomatask:latest'
     }
 
     stages {
@@ -25,35 +28,41 @@ pipeline {
             }
         }
 
-        stage('Terraform init') {
+        stage('build image webpage') { 
             steps {
-                sh 'terraform init'
-
-                //  cleanWs()
-                //     dir("${env.WORKSPACE}@tmp") {
-                //         deleteDir()
-                //     }
-            }  
-        }
-
-        stage('Plan') {
-            steps {
-                sh 'terraform plan -out tfplan'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh 'docker build -t ${NAME_IMAGE_DEV} .'    
             }
         }
-        
-        // stage('Apply plan') {
+
+        // stage('Terraform init') {
         //     steps {
-        //         sh 'terraform apply --auto-approve'
-        //     }
+        //         sh 'terraform init'
+
+        //         //  cleanWs()
+        //         //     dir("${env.WORKSPACE}@tmp") {
+        //         //         deleteDir()
+        //         //     }
+        //     }  
         // }
 
-        stage('Apply plan') {
-            steps {
-                sh 'terraform destroy --auto-approve'
-            }
-        }
+        // stage('Plan') {
+        //     steps {
+        //         sh 'terraform plan -out tfplan'
+        //         sh 'terraform show -no-color tfplan > tfplan.txt'
+        //     }
+        // }
+        
+        // // stage('Apply plan') {
+        // //     steps {
+        // //         sh 'terraform apply --auto-approve'
+        // //     }
+        // // }
+
+        // stage('Apply plan') {
+        //     steps {
+        //         sh 'terraform destroy --auto-approve'
+        //     }
+        // }
 
 
     }
