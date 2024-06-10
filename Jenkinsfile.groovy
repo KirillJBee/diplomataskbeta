@@ -10,7 +10,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION    = 'eu-west-1'
-        GIT_TOKEN = credentials('083f268b-1ab6-4871-a097-baea446e7737')
+        GIT_TOKEN = credentials('gittokenjb')
     }
 
     stages {
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 checkout scmGit(
                                 branches: [[name: 'main']],
-                                userRemoteConfigs: [[credentialsId:'083f268b-1ab6-4871-a097-baea446e7737',
+                                userRemoteConfigs: [[credentialsId:'gittokenjb',
                                 url: 'https://github.com/KirillJBee/diplomataskbeta.git']])
             }
         }
