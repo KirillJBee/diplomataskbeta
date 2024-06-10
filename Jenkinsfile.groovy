@@ -24,6 +24,12 @@ pipeline {
                                 url: 'https://github.com/KirillJBee/diplomataskbeta.git']])
             }
         }
+
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
     }
 
 }
