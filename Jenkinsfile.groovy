@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent { 
+                label 'JenkinsNode1
+'
+            } 
     
     parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
