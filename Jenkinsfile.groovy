@@ -43,9 +43,9 @@ pipeline {
             }
         }
         
-        tage('Apply') {
+        stage('Apply plan') {
             steps {
-                sh 'terraform apply --auto-approve'
+                sh 'terraform apply "tfplan" --auto-approve'
             }
         }
 
