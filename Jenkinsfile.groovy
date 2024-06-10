@@ -40,7 +40,7 @@ pipeline {
                 sh 'docker push ${NAME_IMAGE}'
                 sh 'docker system prune -af'
             }
-        } 
+         
         // stage('Terraform init') {
         //     steps {
         //         sh 'terraform init'
