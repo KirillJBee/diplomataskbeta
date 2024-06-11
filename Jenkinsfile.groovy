@@ -61,6 +61,22 @@ pipeline {
             }
         }
     }
+        // stage('deploy webimage') {
+
+        //     steps {
+        //         //переделать c env
+        //         script {
+        //             withCredentials([
+        //                 file(credentialsId: 'key_to_prod_server', variable: 'KEY_PROD_SERVER'),
+        //                 file(credentialsId: 'vaultkey', variable: 'ANSIBLE_VAULT_KEY')
+        //                 ]) {
+        //                 //sh 'ansible all -i inventory -m ping --connection-password-file $KEY_PROD_SERVER'
+        //                 sh 'ansible-playbook -i dynamic_inventory.ini -u ubuntu --vault-password-file $ANSIBLE_VAULT_KEY playbook.yml'
+        //             }
+        //         }         
+        //     }
+        // }
+
 
     post { 
 
