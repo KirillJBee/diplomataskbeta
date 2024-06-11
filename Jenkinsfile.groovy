@@ -45,11 +45,6 @@ pipeline {
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
-
-                //  cleanWs()
-                //     dir("${env.WORKSPACE}@tmp") {
-                //         deleteDir()
-                //     }
             }  
         }
 
@@ -66,40 +61,22 @@ pipeline {
                     if (params.action == 'apply') {
                         sh 'terraform ${action} -input=false tfplan'
                     } 
-                    else if (params.action == 'destroy') {
+                    else  (params.action == 'destroy') {
                         sh 'terraform ${action} --auto-approve'
                     } 
-                    else {
-                        error "Invalid action selected. Please choose either 'apply' or 'destroy'."
-                    }
                 }
-             cleanWs()
+            }
+        }
+
+        stage ('Clean workspace on Agent') {
+            steps {
+                cleanWs()
                     dir("${env.WORKSPACE}@tmp") {
                         deleteDir()
                     }
             }
         }
-
-        // stage('Plan') {
-        //     steps {
-        //         sh 'terraform plan -out tfplan'
-        //         sh 'terraform show -no-color tfplan > tfplan.txt'
-        //     }
-        // }
         
-        // // stage('Apply plan') {
-        // //     steps {
-        // //         sh 'terraform apply --auto-approve'
-        // //     }
-        // // }
-
-        // stage('Destroy') {
-        //     steps {
-        //         sh 'terraform destroy --auto-approve'
-        //     }
-        // }
-
-
     }
 
 }
