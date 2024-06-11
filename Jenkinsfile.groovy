@@ -73,6 +73,10 @@ pipeline {
                         error "Invalid action selected. Please choose either 'apply' or 'destroy'."
                     }
                 }
+             cleanWs()
+                    dir("${env.WORKSPACE}@tmp") {
+                        deleteDir()
+                    }
             }
         }
 
