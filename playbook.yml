@@ -36,7 +36,7 @@
 
     - name: Pull and Run  latest image
       docker_container:
-        name: testfluskapp_prod
+        name: diplomatask
         image: kirilljbee/diplomatask:tagname
         state: started
         ports:
