@@ -5,7 +5,6 @@ pipeline {
             }
     
     parameters {
-        // booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
         choice(name: 'Action', choices: ['apply', 'destroy'], description: 'Select the action to perform')
     }
 
@@ -48,16 +47,17 @@ pipeline {
             }  
         }
 
-        stage('Plan') {
+        stage('Terraform plan') {
             steps {
                 sh 'terraform plan -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
 
-        stage('Apply') {
+        stage('Apply/Destroy') {
             steps {
-                sh 'terraform apply -input=false tfplan'
+                // sh 'terraform apply -input=false tfplan'
+                sh 'terraform destroy --auto-approve'
             }
         }
     }
