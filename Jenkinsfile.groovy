@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scmGit(
-                                branches: [[name: 'main']],
+                                branches: [[name: 'development']],
                                 userRemoteConfigs: [[credentialsId:'GIT_TOKEN',
                                 url: 'https://github.com/KirillJBee/diplomataskbeta.git']])
             }
