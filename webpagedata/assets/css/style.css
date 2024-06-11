@@ -1,0 +1,43 @@
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Pacifico&display=swap');
+
+        body {
+            height: 100vh;
+            background-color: #c0c0c0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .section {
+            width: 1600px;
+            margin: 50px auto;
+            background-color: #FFA500;
+            border-radius: 20px;
+            box-shadow: 1px -1px 53px 6px rgba(115,108,94,0.75);
+            border: rgb(105, 105, 105) 1px solid;
+        }
+
+        .title {
+            margin-bottom: 50px;
+            padding-top: 50px;
+            font-family: "Comfortaa", sans-serif;
+            font-weight: bold;
+            font-style: normal;
+            display: flex;
+            justify-content: center;
+            text-decoration: underline
+        }
+
+        .image {
+            padding-bottom: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .description {
+            font-family: "Comfortaa", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+        }
