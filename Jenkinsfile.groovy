@@ -60,8 +60,7 @@ pipeline {
                 //sh 'terraform destroy --auto-approve'
             }
         }
-    }
-    
+
         stage('Deploy webimage') {
 
             steps {
@@ -74,6 +73,10 @@ pipeline {
                 }         
             }
         }
+
+    }
+
+        
 
     post { 
 
