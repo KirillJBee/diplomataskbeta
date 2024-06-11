@@ -34,7 +34,7 @@
         username: "{{ DOCKER_USERNAME }}"
         password: "{{ DOCKERHUB_PASSWORD }}"
 
-    - name: Pull and Run  latest image
+    - name: Pull and Run latest image
       docker_container:
         name: diplomatask
         image: kirilljbee/diplomatask:latest
