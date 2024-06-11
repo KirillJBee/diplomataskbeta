@@ -55,31 +55,14 @@ pipeline {
             }
         }
 
-        stage('Apply / Destroy') {
+        stage('Apply') {
             steps {
-                script {
-                    if (params.action == 'apply') {
-                        sh 'terraform ${action} -input=false tfplan'
-                    } 
-                    else  (params.action == 'destroy') {
-                        sh 'terraform ${action} --auto-approve'
-                    } 
-                }
+                sh 'terraform apply -input=false tfplan'
             }
         }
-
-        stage ('Clean workspace on Agent') {
-            steps {
-                cleanWs()
-                    dir("${env.WORKSPACE}@tmp") {
-                        deleteDir()
-                    }
-            }
-        }
-        
     }
 
-    post ('Notification') { 
+    post { 
 
         success {
             mail to: 'jbeework@gmail.com',
@@ -99,6 +82,4 @@ pipeline {
             body: "Please go to ${BUILD_URL} and verify the build" 
         }
     }
-
-
 }
