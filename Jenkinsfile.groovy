@@ -79,4 +79,26 @@ pipeline {
         
     }
 
+    post ('Notification') { 
+
+        success {
+            mail to: 'jbeework@gmail.com',
+            subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was successfully completed!",
+            body: "Please go to ${BUILD_URL} and verify the build"      
+        }
+
+        failure {
+            mail to: 'jbeework@gmail.com',
+            subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ended unsuccessfully!",
+            body: "Please go to ${BUILD_URL} and verify the build"              
+        }
+
+        aborted {
+            mail to: 'jbeework@gmail.com',
+            subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was aborted",
+            body: "Please go to ${BUILD_URL} and verify the build" 
+        }
+    }
+
+
 }
