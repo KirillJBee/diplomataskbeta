@@ -33,8 +33,18 @@
       docker_login:
         username: "{{ DOCKER_USERNAME }}"
         password: "{{ DOCKERHUB_PASSWORD }}"
+    
+    - name: Stop a webpage container
+      community.docker.docker_container:
+        name: diplomatask
+        state: stopped
+    
+    - name: Stop docker containers
+      shell: |
+        docker system prune -af
 
-    - name: Pull and Run latest image
+
+    - name: Pull and Run latest webpage image
       docker_container:
         name: diplomatask
         image: kirilljbee/diplomatask:latest
