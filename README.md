@@ -1,6 +1,22 @@
 ## Запуск простой HTML cтраницы на AWS инстансе на сервере NGINX в Docker-контейнере c применением Jenkins CI/CD, Terraform и Ansible
 
 Структура проекта представлена на изображении ниже
+:boom: 
+# ВНИМАНИЕ, ниже, перечислены:
+Вам необходимо иметь учётную запись AMI с соотвествующими правами
+Проект производится с использованием закрытого репозитория GitHub, DockerHub.
+
+   ```tf
+   environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        AWS_DEFAULT_REGION    = 'eu-west-1'
+        GIT_TOKEN = credentials('GIT_TOKEN')
+        DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
+        NAME_IMAGE = 'kirilljbee/diplomatask:latest'
+    }
+   ```
+
 Работа производится в ветку development, если предусматривается рабочая ветка с иным именем необходимы внести соотвествующие правки в Jenkinsfile.groovy
 Проект предусматривае
 > Цель: Ознакомиться с основами инфраструктуры как код и практическим применением Terraform для управления инфраструктурой.
