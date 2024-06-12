@@ -42,6 +42,7 @@ checkout scmGit(
 :exclamation: Страница сайта откроется по адресу http://IP-EC2:5000, где IP-EC2 - это публичный IP адрес созданого инстанса EC2.
 Этот адрес можно узнать в Console Output Jenkins после выполнения пайплайна:
 
+<img width="600" src="https://github.com/KirillJBee/diplomataskbeta/assets/77605315/0cebecf0-257d-499f-b4c0-a6b7363319cb">
 
 
 Результат выполнения команды `terraform apply`:
