@@ -1,22 +1,31 @@
-# Запуск простой HTML cтраницы на AWS инстансе на сервере NGINX в Docker-контейнере c применением Jenkins CI/CD, Terraform и Ansible
+# Запуск простой HTML cтраницы на сервере NGINX в Docker-контейнере на AWS инстансе c применением Jenkins CI/CD, Terraform и Ansible
 
 Структура проекта представлена на изображении ниже
 
 :boom: 
-## ВНИМАНИЕ, ниже, перечислены:
-Вам необходимо иметь учётную запись AMI с соотвествующими правами
-Проект производится с использованием закрытого репозитория GitHub, DockerHub.
+## ВНИМАНИЕ, проект предусматривает использование закрытых репозиториев GitHub и  DockerHub. Ниже перечислены необходимы условия для выполнения:
+:eight_spoked_asterisk: 1. Учётная запись AMI с соотвествующими правами.
+:eight_spoked_asterisk: GitHub репозиторий с доступом по Token
+:eight_spoked_asterisk: Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible
+:eight_spoked_asterisk: Учетная запись в DockerHub и репозиторий для образа
+:eight_spoked_asterisk: Зашифрованные данный учётной записи DockerHub посредством Vault
+
+Все Ваши приватные данные заменяются в Jenkinsfile.groovy файле, а так же задаются непосредственно в Jenkins  
 
    ```tf
    environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-        AWS_DEFAULT_REGION    = 'eu-west-1'
         GIT_TOKEN = credentials('GIT_TOKEN')
         DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
-        NAME_IMAGE = 'kirilljbee/diplomatask:latest'
     }
    ```
+Пайаплайн запускается с ветки Development, если Вам необходима другая ветка репозитория внесите соотвествующие правки в Jenkinsfile.groovy и настроки пайлайна:
+
+```tf
+checkout scmGit(
+               branches: [[name: 'development']],
+```
 
 Работа производится в ветку development, если предусматривается рабочая ветка с иным именем необходимы внести соотвествующие правки в Jenkinsfile.groovy
 Проект предусматривае
