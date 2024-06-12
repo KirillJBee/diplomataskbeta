@@ -9,7 +9,7 @@
 
 :eight_spoked_asterisk: 2. GitHub репозиторий с доступом по Token.
 
-:eight_spoked_asterisk: 3. Непосредственно Ваш сайт и его компоненты выгруженные в папку webpagedata рабочего репозитория
+:eight_spoked_asterisk: 3. Непосредственно Ваш сайт и его компоненты выгруженные в папку **webpagedata** рабочего репозитория
 
 :eight_spoked_asterisk: 4. Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible.
 
