@@ -6,12 +6,15 @@
 ## ВНИМАНИЕ, проект предусматривает использование закрытых репозиториев GitHub и  DockerHub. Ниже перечислены необходимые условия для выполнения:
 
 :eight_spoked_asterisk: 1. Учётная запись AMI с соотвествующими правами.
-:eight_spoked_asterisk: GitHub репозиторий с доступом по Token
-:eight_spoked_asterisk: Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible
+
+:eight_spoked_asterisk: GitHub репозиторий с доступом по Token.
+
+:eight_spoked_asterisk: Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible.
+
 :eight_spoked_asterisk: Учетная запись в DockerHub и репозиторий для образа
 :eight_spoked_asterisk: Зашифрованные данный учётной записи DockerHub посредством Vault
 
-Все Ваши приватные данные заменяются в Jenkinsfile.groovy файле, а так же задаются непосредственно в Jenkins  
+Вам необходимо описать свои приватные данные в Jenkins Credentials и  указать соотвествующим образом в Jenkinsfile.groovy файле: 
 
    ```tf
    environment {
