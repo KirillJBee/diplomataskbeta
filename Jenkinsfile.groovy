@@ -3,10 +3,6 @@ pipeline {
     agent { 
                 label 'JenkinsNode1'
             }
-    
-    // parameters {
-    //     choice(name: 'Action', choices: ['apply', 'destroy'], description: 'Select the action to perform')
-    // }
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
