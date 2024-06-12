@@ -9,13 +9,15 @@
 
 :eight_spoked_asterisk: 2. GitHub репозиторий с доступом по Token.
 
-:eight_spoked_asterisk: 3. Непосредственно Ваш сайт и его компоненты выгруженные в папку **webpagedata** Вашего репозитория
+:eight_spoked_asterisk: 3. Для автоматического старта Jenkins при **push** в ветку, активируйте вебхук в настройках GitHub.
 
-:eight_spoked_asterisk: 4. Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible.
+:eight_spoked_asterisk: 4. Непосредственно Ваш сайт и его компоненты выгруженные в папку **webpagedata** Вашего репозитория
 
-:eight_spoked_asterisk: 5. Учетная запись в DockerHub и репозиторий для образа.
+:eight_spoked_asterisk: 5. Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible.
 
-:eight_spoked_asterisk: 6. Зашифрованные данные учётной записи DockerHub посредством Vault.
+:eight_spoked_asterisk: 6. Учетная запись в DockerHub и репозиторий для образа.
+
+:eight_spoked_asterisk: 7. Зашифрованные данные учётной записи DockerHub посредством Vault.
 
 Вам необходимо описать свои приватные данные в Jenkins Credentials и  указать соотвествующим образом в Jenkinsfile.groovy файле: 
 
