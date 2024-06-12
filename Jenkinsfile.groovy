@@ -1,12 +1,8 @@
 pipeline {
 
     agent { 
-                label 'JenkinsNode1'
-            }
-    
-    // parameters {
-    //     choice(name: 'Action', choices: ['apply', 'destroy'], description: 'Select the action to perform')
-    // }
+            label 'JenkinsNode1'
+          }
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
@@ -21,7 +17,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scmGit(
-                                branches: [[name: 'main']],
+                                branches: [[name: 'development']],
                                 userRemoteConfigs: [[credentialsId:'GIT_TOKEN',
                                 url: 'https://github.com/KirillJBee/diplomataskbeta.git']])
             }
@@ -56,8 +52,8 @@ pipeline {
 
         stage('Apply/Destroy') {
             steps {
-                //sh 'terraform apply -input=false tfplan'
-                sh 'terraform destroy --auto-approve'
+                sh 'terraform apply -input=false tfplan'
+                //sh 'terraform destroy --auto-approve'
             }
         }
 

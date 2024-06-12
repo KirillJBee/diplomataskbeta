@@ -5,14 +5,17 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
-provider "aws" {
-  region  = var.aws_region
+variable "aws_ami" {
+  description = "Имя образа ami"
+  type = string
+  #Образ Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2024-04-11
+  default = "ami-0607a9783dd204cae"
 }
 
-// Условия для генерации ключей
-resource "tls_private_key" "rsa_4096" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
+variable "aws_instance" {
+  description = "Тип инстанса"
+  type = string
+  default = "t2.micro"
 }
 
 variable "key_name" {
@@ -21,13 +24,23 @@ variable "key_name" {
   default = "tf_key.pem"
 }
 
+provider "aws" {
+  region  = var.aws_region
+}
+
+#Условия для генерации приватного ключа
+resource "tls_private_key" "rsa_4096" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 // Создание пары ключей для поключения к инстансу EC2 через SSH
 resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
 
-// Сохранение PEM ключа файла локально и изменение прав
+// Сохранение PEM ключа файла локально и изменение прав доступа
 resource "local_file" "private_key" {
   content  = tls_private_key.rsa_4096.private_key_pem
   filename = var.key_name
@@ -64,10 +77,10 @@ resource "aws_security_group" "sg_terraform" {
   }
 }
 
+#Создание инстанса
 resource "aws_instance" "public_instance" {
-  #Образ Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2024-04-11
-  ami                    = "ami-0607a9783dd204cae"
-  instance_type          = "t2.micro"
+  ami                    = var.aws_ami
+  instance_type          = var.aws_instance
   key_name               = aws_key_pair.key_pair.key_name
   vpc_security_group_ids = [aws_security_group.sg_terraform.id]
 
@@ -75,15 +88,16 @@ resource "aws_instance" "public_instance" {
     Name = "diploma_task"
   }
 
+#Создание на агенте рабочего файла списка хостов для Ansible
   provisioner "local-exec" {
     command = "touch dynamic_inventory.ini"
   }
 
+#Подключение с агента к созданому инстансу посредством ssh
   provisioner "remote-exec" {
-    inline = [
-      "echo 'EC2 instance is ready.'"
-    ]
-
+      inline = [
+      "echo 'EC2 instance is ready!'"
+      ]
     connection {
       type        = "ssh"
       host        = self.public_ip
@@ -93,6 +107,7 @@ resource "aws_instance" "public_instance" {
   }
 }
   
+#Внесение данных в инвенторный файл для достпа Ansible
 data "template_file" "inventory" {
   template = <<-EOT
     [ec2_instances]
@@ -100,6 +115,7 @@ data "template_file" "inventory" {
     EOT
 }
 
+#Изменение прав доступа к файлу хостов
 resource "local_file" "dynamic_inventory" {
   depends_on = [aws_instance.public_instance]
   filename = "dynamic_inventory.ini"
@@ -110,11 +126,3 @@ resource "local_file" "dynamic_inventory" {
   }
 }
 
-# resource "null_resource" "run_ansible" {
-#   depends_on = [local_file.dynamic_inventory]
-
-#   provisioner "local-exec" {
-#     command = "ansible-playbook -i dynamic_inventory.ini playbook.yml"
-#     working_dir = path.module
-#   }
-# }
