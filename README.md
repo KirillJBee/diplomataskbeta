@@ -39,11 +39,8 @@ checkout scmGit(
 
 :exclamation: Работа производится в ветку development, если предусматривается ветка с иным именем необходимо внести соотвествующие правки в Jenkinsfile.groovy
 
-:exclamation: Страница сайта откроется по адресу http://IP-EC2:5000, где IP-EC2 - это публичный IP адрес созданого инстанса EC2.
+:exclamation: Страница сайта будет доступна по адресу http://IP-EC2:5000, где IP-EC2 - это публичный IP адрес созданого инстанса EC2.
 Этот адрес можно узнать в Console Output Jenkins после выполнения пайплайна:
 
 <img width="600" src="https://github.com/KirillJBee/diplomataskbeta/assets/77605315/0cebecf0-257d-499f-b4c0-a6b7363319cb">
 
-
-Результат выполнения команды `terraform apply`:
-<img width="800" alt="terraform_apply_2" src="https://github.com/KirillJBee/terraform_project/assets/77605315/62de4411-d0dd-45c4-89c7-2075d5353c3e">
