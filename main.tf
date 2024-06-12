@@ -93,8 +93,11 @@ resource "aws_instance" "public_instance" {
     command = "touch dynamic_inventory.ini"
   }
 
-#Подключение с агента к созданому инстансу
+#Подключение с агента к созданому инстансу посредством ssh
   provisioner "remote-exec" {
+      inline = [
+      "echo 'EC2 instance is ready!'"
+      ]
     connection {
       type        = "ssh"
       host        = self.public_ip
