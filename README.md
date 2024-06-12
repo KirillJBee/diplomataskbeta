@@ -35,7 +35,7 @@
 checkout scmGit(
                branches: [[name: 'development']],
 ```
-<img width="800" src="https://github.com/KirillJBee/diplomataskbeta/assets/77605315/3153df83-0e7f-46cb-81b1-cdebe3d8493a">
+<img width="600" src="https://github.com/KirillJBee/diplomataskbeta/assets/77605315/3153df83-0e7f-46cb-81b1-cdebe3d8493a">
 
 Работа производится в ветку development, если предусматриваетсяветка с иным именем необходимо внести соотвествующие правки в Jenkinsfile.groovy
 Проект предусматривае
