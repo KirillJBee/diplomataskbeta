@@ -4,6 +4,7 @@
 
 :boom: 
 ## ВНИМАНИЕ, проект предусматривает использование закрытых репозиториев GitHub и  DockerHub. Ниже перечислены необходимы условия для выполнения:
+
 :eight_spoked_asterisk: 1. Учётная запись AMI с соотвествующими правами.
 :eight_spoked_asterisk: GitHub репозиторий с доступом по Token
 :eight_spoked_asterisk: Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible
