@@ -27,7 +27,7 @@
         DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
     }
    ```
-Пайаплайн запускается с ветки Development, если Вам необходима другая ветка репозитория внесите соотвествующие правки в Jenkinsfile.groovy и настроки пайлайна:
+Пайаплайн запускается с ветки Development, если Вам необходима другая ветка репозитория внесите соотвествующие правки в Jenkinsfile.groovy и настроки пайплайна:
 
 ```tf
 checkout scmGit(
