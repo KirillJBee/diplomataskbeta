@@ -7,12 +7,15 @@
 
 :eight_spoked_asterisk: 1. Учётная запись AMI с соотвествующими правами.
 
-:eight_spoked_asterisk: GitHub репозиторий с доступом по Token.
+:eight_spoked_asterisk: 2. GitHub репозиторий с доступом по Token.
 
-:eight_spoked_asterisk: Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible.
+:eight_spoked_asterisk: 3. Непосредственно Ваш сайт и его компоненты выгруженные в папку webpagedata рабочего репозитория
 
-:eight_spoked_asterisk: Учетная запись в DockerHub и репозиторий для образа
-:eight_spoked_asterisk: Зашифрованные данный учётной записи DockerHub посредством Vault
+:eight_spoked_asterisk: 4. Jenkins с одним агентом, на агенте установлен Docker, Terraform и Ansible.
+
+:eight_spoked_asterisk: 5. Учетная запись в DockerHub и репозиторий для образа.
+
+:eight_spoked_asterisk: 6. Зашифрованные данные учётной записи DockerHub посредством Vault.
 
 Вам необходимо описать свои приватные данные в Jenkins Credentials и  указать соотвествующим образом в Jenkinsfile.groovy файле: 
 
