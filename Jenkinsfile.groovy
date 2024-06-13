@@ -84,13 +84,13 @@ pipeline {
         failure {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ended unsuccessfully!",
-            body: "Please go to ${BUILD_URL} and verify the build"              
+            body: "Please go to ${BUILD_URL} and verify the build for ${GIT_LOCAL_BRANCH} ${GIT_COMMIT}"              
         }
 
         aborted {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was aborted",
-            body: "Please go to ${BUILD_URL} and verify the build" 
+            body: "Please go to ${BUILD_URL} and verify the build for ${GIT_LOCAL_BRANCH} ${GIT_COMMIT}" 
         }
     }
 }
