@@ -52,7 +52,8 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh 'terraform apply -input=false tfplan'
+                //sh 'terraform apply -input=false tfplan'
+                sh 'terraform destroy --out-approve'
             }
         }
 
@@ -77,7 +78,7 @@ pipeline {
         success {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was successfully completed!",
-            body: "Please go to ${BUILD_URL} and verify the build"      
+            body: "Please go to ${BUILD_URL} and verify the build ${GIT_COMMIT}"      
         }
 
         failure {
