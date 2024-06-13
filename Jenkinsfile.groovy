@@ -78,7 +78,7 @@ pipeline {
         success {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was successfully completed!",
-            body: "Please go to ${BUILD_URL} and verify the build ${GIT_COMMIT}"      
+            body: "Please go to ${BUILD_URL} and verify the build for ${GIT_LOCAL_BRANCH} ${GIT_COMMIT}"      
         }
 
         failure {
