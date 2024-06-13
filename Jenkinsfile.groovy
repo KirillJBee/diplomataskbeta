@@ -52,8 +52,8 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh 'terraform apply -input=false tfplan'
-                //sh 'terraform destroy -auto-approve'
+                //sh 'terraform apply -input=false tfplan'
+                sh 'terraform destroy -auto-approve'
             }
         }
 
@@ -78,19 +78,19 @@ pipeline {
         success {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was successfully completed!",
-            body: "Please go to ${BUILD_URL} and verify the build for ${GIT_LOCAL_BRANCH} ${GIT_COMMIT}"      
+            body: "Please go to ${BUILD_URL} and verify the build for  ${GIT_COMMIT}"      
         }
 
         failure {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ended unsuccessfully!",
-            body: "Please go to ${BUILD_URL} and verify the build for ${GIT_LOCAL_BRANCH} ${GIT_COMMIT}"              
+            body: "Please go to ${BUILD_URL} and verify the build for  ${GIT_COMMIT}"              
         }
 
         aborted {
             mail to: 'jbeework@gmail.com',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was aborted",
-            body: "Please go to ${BUILD_URL} and verify the build for ${GIT_LOCAL_BRANCH} ${GIT_COMMIT}" 
+            body: "Please go to ${BUILD_URL} and verify the build for  ${GIT_COMMIT}" 
         }
     }
 }
