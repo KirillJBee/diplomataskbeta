@@ -11,7 +11,7 @@ pipeline {
         GIT_TOKEN = credentials('GIT_TOKEN')
         DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
         NAME_IMAGE = 'kirilljbee/diplomatask:latest'
-        EMAIL_ADDRESS = credentials('owner_email')
+        // EMAIL_ADDRESS = credentials('owner_email')
     }
 
     stages {
@@ -75,10 +75,9 @@ pipeline {
         
 
     post { 
-
-
         success {
-            mail to: 'credentialsId:'EMAIL_ADDRESS'',
+            withCredentials([(credentialsId: 'owner_email', variable: '$EMAIL_ADDRESS')]) 
+            mail to: '$EMAIL_ADDRESS',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was successfully completed!",
             body: "Please go to ${BUILD_URL} and verify the build for  ${GIT_COMMIT}"      
         }
