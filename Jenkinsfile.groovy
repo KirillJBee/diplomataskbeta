@@ -11,6 +11,7 @@ pipeline {
         GIT_TOKEN = credentials('GIT_TOKEN')
         DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
         NAME_IMAGE = 'kirilljbee/diplomatask:latest'
+        NAME_EMAIL = credentials
     }
 
     stages {
@@ -53,7 +54,7 @@ pipeline {
         stage('Apply') {
             steps {
                 //sh 'terraform -chdir=terraform apply -input=false tfplan'
-                sh './terraform/terraform destroy -auto-approve'
+                sh 'terraform -chdir=terraform destroy -auto-approve'
             }
         }
 
