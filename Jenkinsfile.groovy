@@ -11,7 +11,7 @@ pipeline {
         GIT_TOKEN = credentials('GIT_TOKEN')
         DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
         NAME_IMAGE = 'kirilljbee/diplomatask:latest'
-        NAME_EMAIL = credentials
+        // NAME_EMAIL = credentials
     }
 
     stages {
