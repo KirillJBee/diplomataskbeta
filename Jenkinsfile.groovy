@@ -17,13 +17,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scmGit(
-                                branches: [[name: 'development']],
-                                userRemoteConfigs: [[credentialsId:'GIT_TOKEN',
-                                url: 'https://github.com/KirillJBee/diplomataskbeta.git']])
+                    branches: [[name: 'development']],
+                    userRemoteConfigs: [[credentialsId:'GIT_TOKEN',
+                    url: 'https://github.com/KirillJBee/diplomataskbeta.git']])
             }
         }
 
-        stage('Build image webpage') { 
+        stage('Build image webpage') {
             steps {
                 sh 'docker build -t ${NAME_IMAGE} .'    
             }
@@ -57,18 +57,18 @@ pipeline {
             }
         }
 
-        stage('Deploy webimage') {
+        // stage('Deploy webimage') {
 
-            steps {
-                script {
-                    withCredentials([
-                        file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
-                        ]) {
-                        sh 'ansible-playbook -i dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY playbook.yml'
-                    }
-                }         
-            }
-        }
+        //     steps {
+        //         script {
+        //             withCredentials([
+        //                 file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
+        //                 ]) {
+        //                 sh 'ansible-playbook -i dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY playbook.yml'
+        //             }
+        //         }         
+        //     }
+        // }
     }
 
         
