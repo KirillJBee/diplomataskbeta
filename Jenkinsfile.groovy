@@ -52,8 +52,8 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh 'terraform -chdir=terraform apply -input=false tfplan'
-                //sh './terraform/terraform destroy -auto-approve'
+                //sh 'terraform -chdir=terraform apply -input=false tfplan'
+                sh './terraform/terraform destroy -auto-approve'
             }
         }
 
