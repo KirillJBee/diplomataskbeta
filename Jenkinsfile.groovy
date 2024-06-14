@@ -57,18 +57,18 @@ pipeline {
             }
         }
 
-        // stage('Deploy webimage') {
+        stage('Deploy webimage') {
 
-        //     steps {
-        //         script {
-        //             withCredentials([
-        //                 file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
-        //                 ]) {
-        //                 sh 'ansible-playbook -i dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY playbook.yml'
-        //             }
-        //         }         
-        //     }
-        // }
+            steps {
+                script {
+                    withCredentials([
+                        file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
+                        ]) {
+                        sh 'ansible-playbook -i dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY ./terraform/playbook.yml'
+                    }
+                }         
+            }
+        }
     }
 
         
