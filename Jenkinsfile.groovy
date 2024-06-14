@@ -38,38 +38,38 @@ pipeline {
             }
         }
 
-        stage('Terraform init') {
-            steps {
-                sh 'terraform -chdir=terraform init'
-            }
-        }
+        // stage('Terraform init') {
+        //     steps {
+        //         sh 'terraform -chdir=terraform init'
+        //     }
+        // }
 
-        stage('Terraform plan') {
-            steps {
-                sh 'terraform -chdir=terraform plan -out tfplan'
-                sh 'terraform -chdir=terraform show -no-color tfplan > tfplan.txt'
-            }
-        }
+        // stage('Terraform plan') {
+        //     steps {
+        //         sh 'terraform -chdir=terraform plan -out tfplan'
+        //         sh 'terraform -chdir=terraform show -no-color tfplan > tfplan.txt'
+        //     }
+        // }
 
-        stage('Apply') {
-            steps {
-                //sh 'terraform -chdir=terraform apply -input=false tfplan'
-                sh 'terraform -chdir=terraform destroy -auto-approve'
-            }
-        }
+        // stage('Apply') {
+        //     steps {
+        //         sh 'terraform -chdir=terraform apply -input=false tfplan'
+        //         //sh 'terraform -chdir=terraform destroy -auto-approve'
+        //     }
+        // }
 
-        stage('Deploy webimage') {
+        // stage('Deploy webimage') {
 
-            steps {
-                script {
-                    withCredentials([
-                        file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
-                        ]) {
-                        sh 'ansible-playbook -i ./terraform/dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY ./ansible/playbook.yml'
-                    }
-                }         
-            }
-        }
+        //     steps {
+        //         script {
+        //             withCredentials([
+        //                 file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
+        //                 ]) {
+        //                 sh 'ansible-playbook -i ./terraform/dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY ./ansible/playbook.yml'
+        //             }
+        //         }         
+        //     }
+        // }
     }
 
         
