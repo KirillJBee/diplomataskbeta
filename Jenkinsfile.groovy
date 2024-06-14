@@ -75,8 +75,8 @@ pipeline {
         
 
     post { 
-
-      withCredentials([
+      script {
+        withCredentials([
                 (credentialsId: 'owner_email', variable:'$EMAIL_ADDRESS')
             ]) 
             
@@ -97,5 +97,6 @@ pipeline {
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was aborted",
             body: "Please go to ${BUILD_URL} and verify the build for  ${GIT_COMMIT}" 
         }
+      }
     }
 }
