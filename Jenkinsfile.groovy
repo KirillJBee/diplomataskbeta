@@ -39,21 +39,21 @@ pipeline {
 
         stage('Terraform init') {
             steps {
-                sh 'terraform init'
+                sh './terraform/terraform init'
             }  
         }
 
         stage('Terraform plan') {
             steps {
-                sh 'terraform plan -out tfplan'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh './terraform/terraform plan -out tfplan'
+                sh './terraform/terraform show -no-color tfplan > tfplan.txt'
             }
         }
 
         stage('Apply') {
             steps {
                 //sh 'terraform apply -input=false tfplan'
-                sh 'terraform destroy -auto-approve'
+                sh './terraform/terraform destroy -auto-approve'
             }
         }
 
