@@ -75,10 +75,12 @@ pipeline {
         
 
     post { 
+
+      withCredentials([
+                (credentialsId: 'owner_email', variable:'$EMAIL_ADDRESS')
+            ]) 
+            
         success {
-            withCredentials(
-                [(credentialsId:'owner_email', variable:'$EMAIL_ADDRESS'
-            )]) 
             mail to: '$EMAIL_ADDRESS',
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) was successfully completed!",
             body: "Please go to ${BUILD_URL} and verify the build for  ${GIT_COMMIT}"      
