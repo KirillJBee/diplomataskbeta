@@ -64,7 +64,7 @@ pipeline {
                     withCredentials([
                         file(credentialsId: 'DH_vaultkey', variable: 'ANSIBLE_VAULT_KEY')
                         ]) {
-                        sh 'ansible-playbook -i ./terraform/dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY playbook.yml'
+                        sh 'ansible-playbook -i ./terraform/dynamic_inventory.ini --vault-password-file $ANSIBLE_VAULT_KEY ./ansible/playbook.yml'
                     }
                 }         
             }
