@@ -11,7 +11,7 @@ pipeline {
         GIT_TOKEN = credentials('GIT_TOKEN')
         DOCKERHUB_CREDENTIALS = credentials('kirilljbee_dockerhub')
         NAME_IMAGE = 'kirilljbee/diplomatask:latest'
-        EMAIL_ADDRESS = credentials('owner_email')
+        // EMAIL_ADDRESS = credentials('owner_email')
     }
 
     stages {
@@ -75,10 +75,10 @@ pipeline {
         
 
     post { 
-    //   script {
-    //     withCredentials([
-    //             (credentialsId: 'owner_email', variable:'$EMAIL_ADDRESS')
-    //         ]) 
+   
+        withCredentials([
+                text(credentialsId: 'owner_email', variable:'$EMAIL_ADDRESS')
+            ]) 
 
         success {
             mail to: '$EMAIL_ADDRESS',
