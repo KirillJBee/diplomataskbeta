@@ -40,20 +40,20 @@ pipeline {
         stage('Terraform init') {
             steps {
                 sh 'terraform -chdir=terraform init'
-            }  
+            }
         }
 
         stage('Terraform plan') {
             steps {
-                sh './terraform/terraform plan -out tfplan'
-                sh './terraform/terraform show -no-color tfplan > tfplan.txt'
+                sh 'terraform -chdir=terraform plan -out tfplan'
+                sh 'terraform -chdir=terraform show -no-color tfplan > tfplan.txt'
             }
         }
 
         stage('Apply') {
             steps {
-                //sh 'terraform apply -input=false tfplan'
-                sh './terraform/terraform destroy -auto-approve'
+                sh 'terraform -chdir=terraform apply -input=false tfplan'
+                //sh './terraform/terraform destroy -auto-approve'
             }
         }
 
